@@ -25,7 +25,7 @@ public class ParserDate {
 		// eg. 31/02/2014 not exists so throw exception
 		SimpleDateFormat vSDF = new SimpleDateFormat("ddMMyyyy");
 		vSDF.setLenient(false);
-		Date vTempData = vSDF.parse("31042014");
+		Date vTempData = vSDF.parse("31112013");
 		System.out.println("fim");
 
 	}

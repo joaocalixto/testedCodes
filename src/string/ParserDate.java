@@ -15,12 +15,16 @@ public class ParserDate {
 
 	public static void main(String[] args) throws ParseException {
 
+		// Insert left zeros
 		int i = 5;
 		String vFormat = String.format("%02d", 5);
 		System.out.println(vFormat);
 
+		// setLenient study
+		// set liniente validate the date
+		// eg. 31/02/2014 not exists so throw exception
 		SimpleDateFormat vSDF = new SimpleDateFormat("ddMMyyyy");
-		vSDF.set
+		vSDF.setLenient(false);
 		Date vTempData = vSDF.parse("31042014");
 		System.out.println("fim");
 

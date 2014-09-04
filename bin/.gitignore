@@ -1,13 +1,6 @@
 /JsoupGtw
-/META-INF
+/classpathChanger
 /codeChef
 /file
-/javafx
-/libs
-/mavenHotDeploy
-/quartz.properties
-/regex
-/socket
-/string
-/swing
-/validacoes
+/jdk.properties
+/properties

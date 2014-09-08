@@ -9,31 +9,33 @@ import java.util.Properties;
 
 public class ClassPathChanger {
 
-	static String HOME = "java.home";
+	static String HOME = "JAVA_HOME";
 	static String CLASS_PATH = "java.class.path";
 	static String JAVA_VERSION = "java.version";
 	static String JDK_32 = "jdk.32";
-	static String JDK_64 = "jdk.364";
+	static String JDK_64 = "jdk.64";
 
-	
 	public static void main(String[] args) {
 
 		showSystemStatus();
 		Integer userInput = getUserInput();
-		
+
 		String newPathJDK = "";
-		
-		if(userInput == 32 || userInput == 64){
-			if(userInput == 32){
+
+		if (userInput == 32 || userInput == 64) {
+			if (userInput == 32) {
 				newPathJDK = PropertiesManager.get32JDK();
-				System.out.println("32");
-			} else if(userInput == 64){
-				System.out.println("64");
+			} else if (userInput == 64) {
 				newPathJDK = PropertiesManager.get64JDK();
 			}
-			System.out.println("System.setProperty(HOME, newPathJDK);");
+			System.out.println("Alterando variavel de ambiente...");
+			System.setProperty(HOME, newPathJDK);
+			System.out.println("Variavel de ambiente alterada com sucesso!");
 		}
+		
+		showSystemStatus();
 		System.out.println("Programa finalizado.");
+		
 
 	}
 
@@ -41,7 +43,7 @@ public class ClassPathChanger {
 		System.out.println("==================================");
 		System.out.println("Systema atualmente");
 		System.out.println("==================================");
-		String property = System.getProperty(HOME);
+		String property =  System.getenv(HOME);
 		System.out.println("JAVA_HOME : " + property);
 		String property3 = System.getProperty(JAVA_VERSION);
 		System.out.println("JAVA_VERSION : " + property3);
@@ -65,26 +67,25 @@ public class ClassPathChanger {
 		}
 		return i;
 	}
-	
-	static class PropertiesManager{
-		
-		private static String getPropertie(String pName){
 
-			 
+	static class PropertiesManager {
+
+		private static String getPropertie(String pName) {
+
 			Properties prop = new Properties();
 			InputStream input = null;
 			String retorno = "";
-		 
+
 			try {
-		 
+
 				input = new FileInputStream("jdk.properties");
-		 
+
 				// load a properties file
 				prop.load(input);
-		 
+
 				// get the property value and print it out
-				retorno= prop.getProperty(pName);
-		 
+				retorno = prop.getProperty(pName);
+
 			} catch (IOException ex) {
 				ex.printStackTrace();
 			} finally {
@@ -96,16 +97,16 @@ public class ClassPathChanger {
 					}
 				}
 			}
-		 
-		  return retorno;
+
+			return retorno;
 		}
-		
-		
-		public static String get32JDK(){
+
+		public static String get32JDK() {
 			return getPropertie(ClassPathChanger.JDK_32);
-			
+
 		}
-		public static String get64JDK(){
+
+		public static String get64JDK() {
 			return getPropertie(ClassPathChanger.JDK_64);
 		}
 	}
